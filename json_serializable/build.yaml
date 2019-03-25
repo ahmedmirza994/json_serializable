@@ -3,6 +3,7 @@ targets:
   $default:
     builders:
       json_serializable:
+        enabled: false
         generate_for:
           include:
           - example/*
@@ -13,6 +14,7 @@ targets:
           - test/literal/*
           - test/yaml/*
       build_web_compilers|entrypoint:
+        enabled: false
         generate_for:
         - test/default_value/**
         - test/generic_files/*_test.dart
@@ -20,6 +22,7 @@ targets:
         - test/kitchen_sink/**
 
       json_serializable|_internal:
+        enabled: false
         generate_for:
         - test/default_value/default_value.dart
         - test/kitchen_sink/kitchen_sink.dart
