@@ -1,9 +1,7 @@
-<h2>JsonSerializable</h2>
-<dl>
-  <dt><code><a name="JsonSerializable-anyMap">JsonSerializable.anyMap</a></code></dt>
-  <dd>
+## JsonSerializable
+#### `JsonSerializable.anyMap`
 
-`build.yaml` config key: `any_map`
+* `build.yaml` key: `any_map`
 
 If `true`, `Map` types are *not* assumed to be `Map<String, dynamic>`
 – which is the default type of `Map` instances return by JSON decode in
@@ -13,22 +11,20 @@ This will increase the code size, but allows `Map` types returned
 from other sources, such as `package:yaml`.
 
 *Note: in many cases the key values are still assumed to be `String`*.
-  </dd>
-  <dt><code><a name="JsonSerializable-checked">JsonSerializable.checked</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `checked`
+#### `JsonSerializable.checked`
+
+* `build.yaml` key: `checked`
 
 If `true`, generated `fromJson` functions include extra checks to validate
 proper deserialization of types.
 
 If an exception is thrown during deserialization, a
 `CheckedFromJsonException` is thrown.
-  </dd>
-  <dt><code><a name="JsonSerializable-createFactory">JsonSerializable.createFactory</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `create_factory`
+#### `JsonSerializable.createFactory`
+
+* `build.yaml` key: `create_factory`
 
 If `true` (the default), a private, static `_$ExampleFromJson` method
 is created in the generated part file.
@@ -43,11 +39,10 @@ class Example {
     _$ExampleFromJson(json);
 }
 ```
-  </dd>
-  <dt><code><a name="JsonSerializable-createToJson">JsonSerializable.createToJson</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `create_to_json`
+#### `JsonSerializable.createToJson`
+
+* `build.yaml` key: `create_to_json`
 
 If `true` (the default), code for encoding JSON is generated for this
 class.
@@ -75,22 +70,21 @@ class Example extends Object with _$ExampleSerializerMixin {
   // ...
 }
 ```
-  </dd>
-  <dt><code><a name="JsonSerializable-disallowUnrecognizedKeys">JsonSerializable.disallowUnrecognizedKeys</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `disallow_unrecognized_keys`
+#### `JsonSerializable.disallowUnrecognizedKeys`
+
+* `build.yaml` key: `disallow_unrecognized_keys`
 
 If `false` (the default), then the generated `FromJson` function will
 ignore unrecognized keys in the provided JSON `Map`.
 
 If `true`, unrecognized keys will cause an `UnrecognizedKeysException` to
 be thrown.
-  </dd>
-  <dt><code><a name="JsonSerializable-encodeEmptyCollection">JsonSerializable.encodeEmptyCollection</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `encode_empty_collection`
+#### `JsonSerializable.encodeEmptyCollection`
+
+* `build.yaml` key: `encode_empty_collection`
+* See also [`JsonKey.encodeEmptyCollection`](#jsonkeyencodeemptycollection)
 
 Whether the generator should include empty collection field values in the
 serialized output.
@@ -101,15 +95,14 @@ are included in generated `toJson` functions.
 
 If `false`, fields with empty collections are omitted from `toJson`.
 
-Note: setting this property to `false` overrides the [`JsonSerializable.includeIfNull`](#JsonSerializable-includeIfNull)
+Note: setting this property to `false` overrides the [`JsonSerializable.includeIfNull`](#jsonserializableincludeifnull)
 value to `false` as well.
 
 Note: non-collection fields are not affected by this value.
-  </dd>
-  <dt><code><a name="JsonSerializable-explicitToJson">JsonSerializable.explicitToJson</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `explicit_to_json`
+#### `JsonSerializable.explicitToJson`
+
+* `build.yaml` key: `explicit_to_json`
 
 If `true`, generated `toJson` methods will explicitly call `toJson` on
 nested objects.
@@ -129,11 +122,10 @@ Example of `explicitToJson: true`
 ```dart
 Map<String, dynamic> toJson() => {'child': child?.toJson()};
 ```
-  </dd>
-  <dt><code><a name="JsonSerializable-fieldRename">JsonSerializable.fieldRename</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `field_rename`
+#### `JsonSerializable.fieldRename`
+
+* `build.yaml` key: `field_rename`
 
 Defines the automatic naming strategy when converting class field names
 into JSON map keys.
@@ -143,13 +135,12 @@ used without modification.
 
 See `FieldRename` for details on the other options.
 
-Note: the value for [`JsonKey.name`](#JsonKey-name) takes precedence over this option for
+Note: the value for [`JsonKey.name`](#jsonkeyname) takes precedence over this option for
 fields annotated with `JsonKey`.
-  </dd>
-  <dt><code><a name="JsonSerializable-generateToJsonFunction">JsonSerializable.generateToJsonFunction</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `generate_to_json_function`
+#### `JsonSerializable.generateToJsonFunction`
+
+* `build.yaml` key: `generate_to_json_function`
 
 Controls how `toJson` functionality is generated for all types processed
 by this generator.
@@ -175,11 +166,11 @@ class Example extends Object with _$ExampleSerializerMixin {
   // ...
 }
 ```
-  </dd>
-  <dt><code><a name="JsonSerializable-includeIfNull">JsonSerializable.includeIfNull</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `include_if_null`
+#### `JsonSerializable.includeIfNull`
+
+* `build.yaml` key: `include_if_null`
+* See also [`JsonKey.includeIfNull`](#jsonkeyincludeifnull)
 
 Whether the generator should include fields with `null` values in the
 serialized output.
@@ -189,11 +180,11 @@ If `true` (the default), all fields are written to JSON, even if they are
 
 If a field is annotated with `JsonKey` with a non-`null` value for
 `includeIfNull`, that value takes precedent.
-  </dd>
-  <dt><code><a name="JsonSerializable-nullable">JsonSerializable.nullable</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `nullable`
+#### `JsonSerializable.nullable`
+
+* `build.yaml` key: `nullable`
+* See also [`JsonKey.nullable`](#jsonkeynullable)
 
 When `true` (the default), `null` fields are handled gracefully when
 encoding to JSON and when decoding `null` and nonexistent values from
@@ -203,29 +194,24 @@ Setting to `false` eliminates `null` verification in the generated code,
 which reduces the code size. Errors may be thrown at runtime if `null`
 values are encountered, but the original class should also implement
 `null` runtime validation if it's critical.
-  </dd>
-  <dt><code><a name="JsonSerializable-useWrappers">JsonSerializable.useWrappers</a></code></dt>
-  <dd>
 
-`build.yaml` config key: `use_wrappers`
+#### `JsonSerializable.useWrappers`
+
+* `build.yaml` key: `use_wrappers`
 
 If `true`, wrappers are used to minimize the number of
 `Map` and `List` instances created during serialization.
 
 This will increase the code size, but it may improve runtime performance,
 especially for large object graphs.
-  </dd>
-</dl>
-<h2>JsonKey</h2>
-<dl>
-  <dt><code><a name="JsonKey-defaultValue">JsonKey.defaultValue</a></code></dt>
-  <dd>
+
+## JsonKey
+#### `JsonKey.defaultValue`
 
 The value to use if the source JSON does not contain this key or if the
 value is `null`.
-  </dd>
-  <dt><code><a name="JsonKey-disallowNullValue">JsonKey.disallowNullValue</a></code></dt>
-  <dd>
+
+#### `JsonKey.disallowNullValue`
 
 If `true`, generated code will throw a `DisallowedNullValueException` if
 the corresponding key exits, but the value is `null`.
@@ -233,14 +219,15 @@ the corresponding key exits, but the value is `null`.
 Note: this value does not affect the behavior of a JSON map *without* the
 associated key.
 
-If [`JsonKey.disallowNullValue`](#JsonKey-disallowNullValue) is `true`, [`JsonKey.includeIfNull`](#JsonKey-includeIfNull) will be treated as
+If [`JsonKey.disallowNullValue`](#jsonkeydisallownullvalue) is `true`, [`JsonKey.includeIfNull`](#jsonkeyincludeifnull) will be treated as
 `false` to ensure compatibility between `toJson` and `fromJson`.
 
-If both [`JsonKey.includeIfNull`](#JsonKey-includeIfNull) and [`JsonKey.disallowNullValue`](#JsonKey-disallowNullValue) are set to `true` on the
+If both [`JsonKey.includeIfNull`](#jsonkeyincludeifnull) and [`JsonKey.disallowNullValue`](#jsonkeydisallownullvalue) are set to `true` on the
 same field, an exception will be thrown during code generation.
-  </dd>
-  <dt><code><a name="JsonKey-encodeEmptyCollection">JsonKey.encodeEmptyCollection</a></code></dt>
-  <dd>
+
+#### `JsonKey.encodeEmptyCollection`
+
+* See also [`JsonSerializable.encodeEmptyCollection`](#jsonserializableencodeemptycollection)
 
 Whether the generator should include the annotated field value in the
 serialized output if it is empty.
@@ -250,8 +237,8 @@ If `true` (the default), empty values are included in the generated
 
 If `false`, fields with empty collections are omitted from `toJson`.
 
-Note: setting this property to `false` overrides the [`JsonKey.includeIfNull`](#JsonKey-includeIfNull)
-value to `false` as well. Explicitly setting [`JsonKey.includeIfNull`](#JsonKey-includeIfNull) to `true`
+Note: setting this property to `false` overrides the [`JsonKey.includeIfNull`](#jsonkeyincludeifnull)
+value to `false` as well. Explicitly setting [`JsonKey.includeIfNull`](#jsonkeyincludeifnull) to `true`
 and setting this property to `false` will cause an error at build time.
 
 Note: setting this property to `false` on a non-collection field
@@ -259,11 +246,10 @@ Note: setting this property to `false` on a non-collection field
 will cause an error at build time.
 
 The default value, `null`, indicates that the behavior should be
-acquired from the [`JsonSerializable.encodeEmptyCollection`](#JsonSerializable-encodeEmptyCollection) annotation on
+acquired from the [`JsonSerializable.encodeEmptyCollection`](#jsonserializableencodeemptycollection) annotation on
 the enclosing class.
-  </dd>
-  <dt><code><a name="JsonKey-fromJson">JsonKey.fromJson</a></code></dt>
-  <dd>
+
+#### `JsonKey.fromJson`
 
 A `Function` to use when decoding the associated JSON value to the
 annotated field.
@@ -272,19 +258,19 @@ Must be a top-level or static `Function` that takes one argument mapping
 a JSON literal to a value compatible with the type of the annotated field.
 
 When creating a class that supports both `toJson` and `fromJson`
-(the default), you should also set [`JsonKey.toJson`](#JsonKey-toJson) if you set [`JsonKey.fromJson`](#JsonKey-fromJson).
-Values returned by [`JsonKey.toJson`](#JsonKey-toJson) should "round-trip" through [`JsonKey.fromJson`](#JsonKey-fromJson).
-  </dd>
-  <dt><code><a name="JsonKey-ignore">JsonKey.ignore</a></code></dt>
-  <dd>
+(the default), you should also set [`JsonKey.toJson`](#jsonkeytojson) if you set [`JsonKey.fromJson`](#jsonkeyfromjson).
+Values returned by [`JsonKey.toJson`](#jsonkeytojson) should "round-trip" through [`JsonKey.fromJson`](#jsonkeyfromjson).
+
+#### `JsonKey.ignore`
 
 `true` if the generator should ignore this field completely.
 
 If `null` (the default) or `false`, the field will be considered for
 serialization.
-  </dd>
-  <dt><code><a name="JsonKey-includeIfNull">JsonKey.includeIfNull</a></code></dt>
-  <dd>
+
+#### `JsonKey.includeIfNull`
+
+* See also [`JsonSerializable.includeIfNull`](#jsonserializableincludeifnull)
 
 Whether the generator should include fields with `null` values in the
 serialized output.
@@ -293,25 +279,25 @@ If `true`, the generator should include the field in the serialized
 output, even if the value is `null`.
 
 The default value, `null`, indicates that the behavior should be
-acquired from the [`JsonSerializable.includeIfNull`](#JsonSerializable-includeIfNull) annotation on the
+acquired from the [`JsonSerializable.includeIfNull`](#jsonserializableincludeifnull) annotation on the
 enclosing class.
 
-If [`JsonKey.disallowNullValue`](#JsonKey-disallowNullValue) is `true`, this value is treated as `false` to
+If [`JsonKey.disallowNullValue`](#jsonkeydisallownullvalue) is `true`, this value is treated as `false` to
 ensure compatibility between `toJson` and `fromJson`.
 
-If both [`JsonKey.includeIfNull`](#JsonKey-includeIfNull) and [`JsonKey.disallowNullValue`](#JsonKey-disallowNullValue) are set to `true` on the
+If both [`JsonKey.includeIfNull`](#jsonkeyincludeifnull) and [`JsonKey.disallowNullValue`](#jsonkeydisallownullvalue) are set to `true` on the
 same field, an exception will be thrown during code generation.
-  </dd>
-  <dt><code><a name="JsonKey-name">JsonKey.name</a></code></dt>
-  <dd>
+
+#### `JsonKey.name`
 
 The key in a JSON map to use when reading and writing values corresponding
 to the annotated fields.
 
 If `null`, the field name is used.
-  </dd>
-  <dt><code><a name="JsonKey-nullable">JsonKey.nullable</a></code></dt>
-  <dd>
+
+#### `JsonKey.nullable`
+
+* See also [`JsonSerializable.nullable`](#jsonserializablenullable)
 
 When `true`, `null` fields are handled gracefully when encoding to JSON
 and when decoding `null` and nonexistent values from JSON.
@@ -322,11 +308,10 @@ at runtime if `null` values are encountered, but the original class should
 also implement `null` runtime validation if it's critical.
 
 The default value, `null`, indicates that the behavior should be
-acquired from the [`JsonSerializable.nullable`](#JsonSerializable-nullable) annotation on the
+acquired from the [`JsonSerializable.nullable`](#jsonserializablenullable) annotation on the
 enclosing class.
-  </dd>
-  <dt><code><a name="JsonKey-required">JsonKey.required</a></code></dt>
-  <dd>
+
+#### `JsonKey.required`
 
 When `true`, generated code for `fromJson` will verify that the source
 JSON map contains the associated key.
@@ -336,9 +321,8 @@ thrown.
 
 Note: only the existence of the key is checked. A key with a `null` value
 is considered valid.
-  </dd>
-  <dt><code><a name="JsonKey-toJson">JsonKey.toJson</a></code></dt>
-  <dd>
+
+#### `JsonKey.toJson`
 
 A `Function` to use when encoding the annotated field to JSON.
 
@@ -346,7 +330,6 @@ Must be a top-level or static `Function` with one parameter compatible
 with the field being serialized that returns a JSON-compatible value.
 
 When creating a class that supports both `toJson` and `fromJson`
-(the default), you should also set [`JsonKey.fromJson`](#JsonKey-fromJson) if you set [`JsonKey.toJson`](#JsonKey-toJson).
-Values returned by [`JsonKey.toJson`](#JsonKey-toJson) should "round-trip" through [`JsonKey.fromJson`](#JsonKey-fromJson).
-  </dd>
-</dl>
+(the default), you should also set [`JsonKey.fromJson`](#jsonkeyfromjson) if you set [`JsonKey.toJson`](#jsonkeytojson).
+Values returned by [`JsonKey.toJson`](#jsonkeytojson) should "round-trip" through [`JsonKey.fromJson`](#jsonkeyfromjson).
+

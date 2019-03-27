@@ -8,6 +8,9 @@ import 'package:source_gen/source_gen.dart';
 
 Builder docBuilder([_]) => _DocBuilder();
 
+const _jsonKey = 'JsonKey';
+const _jsonSerializable = 'JsonSerializable';
+
 class _DocBuilder extends Builder {
   @override
   FutureOr<void> build(BuildStep buildStep) async {
@@ -32,20 +35,15 @@ class _DocBuilder extends Builder {
     final buffer = StringBuffer();
 
     for (var entry in descriptionMap.entries) {
-      buffer.writeln('<h2>${entry.key}</h2>');
-      buffer.writeln('<dl>');
+      buffer.writeln('## ${entry.key}');
 
       for (var description in entry.value) {
-        final anchor = _anchorUriForName(entry.key, description.field.name);
         buffer.writeln('''
-  <dt><code><a name="$anchor">${description.parent}.${description.field.name}</a></code></dt>
-  <dd>
+#### `${description.parent}.${description.field.name}`
 
 ${description.description}
-  </dd>''');
+''');
       }
-
-      buffer.writeln('</dl>');
     }
 
     await buildStep.writeAsString(
@@ -58,9 +56,10 @@ ${description.description}
   };
 }
 
-const _annotationClasses = ['JsonSerializable', 'JsonKey'];
+const _annotationClasses = [_jsonSerializable, _jsonKey];
 
-String _anchorUriForName(String owner, String name) => '$owner-$name';
+String _anchorUriForName(String owner, String name) =>
+    '[`$owner.$name`](#${'$owner$name'.toLowerCase()})';
 
 class _FieldInfo implements Comparable<_FieldInfo> {
   static final _ref = RegExp('\\[([^\\]]+)\\]');
@@ -68,6 +67,18 @@ class _FieldInfo implements Comparable<_FieldInfo> {
 
   final String parent;
   final FieldElement field;
+
+  String get _fieldName => field.name;
+
+  String get _other {
+    switch (parent) {
+      case _jsonSerializable:
+        return _jsonKey;
+      case _jsonKey:
+        return _jsonSerializable;
+    }
+    throw FallThroughError();
+  }
 
   String get description {
     var description =
@@ -101,27 +112,36 @@ class _FieldInfo implements Comparable<_FieldInfo> {
 
       if (refParentClass != null) {
         assert(refName != null);
-        return '[`$refParentClass.$refName`]'
-            '(#${_anchorUriForName(refParentClass, refName)})';
+        return _anchorUriForName(refParentClass, refName);
       }
 
       return '`$ref`';
     });
 
-    if (parent == 'JsonSerializable') {
-      final yamlConfigKey = snakeCase(field.name);
-      description = '`build.yaml` config key: `$yamlConfigKey`\n\n$description';
+    final bullets = <String>[];
+
+    if (parent == _jsonSerializable) {
+      final yamlConfigKey = snakeCase(_fieldName);
+      bullets.add('`build.yaml` key: `$yamlConfigKey`');
+    }
+
+    if (_knownEntities[_other]?.contains(_fieldName) ?? false) {
+      bullets.add('See also ${_anchorUriForName(_other, _fieldName)}');
+    }
+
+    if (bullets.isNotEmpty) {
+      description = '${bullets.map((v) => '* $v').join('\n')}\n\n$description';
     }
 
     return description;
   }
 
   _FieldInfo(this.parent, this.field) {
-    _knownEntities.putIfAbsent(parent, () => Set<String>()).add(field.name);
+    _knownEntities.putIfAbsent(parent, () => Set<String>()).add(_fieldName);
   }
 
   @override
-  int compareTo(_FieldInfo other) => field.name.compareTo(other.field.name);
+  int compareTo(_FieldInfo other) => _fieldName.compareTo(other._fieldName);
 
   @override
   String toString() => '_FieldThing($field)';
